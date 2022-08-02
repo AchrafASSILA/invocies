@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InvoiceReportController;
 use App\Http\Controllers\InvoicesAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\ProductsController;
@@ -34,14 +35,24 @@ Route::middleware([
 });
 Route::prefix('/admin')->group(function () {
     Route::resource('products', ProductsController::class)->middleware('auth');
+    Route::resource('invoices', InvoicesController::class)->middleware('auth');
+    Route::resource('invoicesAtt', InvoicesAttachmentsController::class)->middleware('auth');
     Route::get('/section/{id}', [InvoicesController::class, 'getproducts'])->middleware('auth');
     Route::resource('sections', SectionsController::class)->middleware('auth');
     Route::get('/{page}', [AdminController::class, 'index'])->middleware('auth');
+    Route::get('/invoiceArchive', [InvoicesController::class, 'getInvoicesArchived'])->name('invoiceArchive')->middleware('auth');
+    Route::get('/invoice_reports', [InvoiceReportController::class, 'index'])->name('invoiceReport')->middleware('auth');
+    Route::get('/{status}', [InvoicesController::class, 'getInvoicesByStatus'])->name('invoiceStatus')->middleware('auth');
+    Route::get('/print_invoice/{id}', [InvoicesController::class, 'printInvoice'])->name('printInvoice')->middleware('auth');
+    Route::delete('/invoice/{id}', [InvoicesController::class, 'transformToArchived'])->name('transformToArchived')->middleware('auth');
+    Route::put('/restoreInvoice/{id}', [InvoicesController::class, 'restoreInvoice'])->name('restoreInvoice')->middleware('auth');
+    Route::post('/invoice/{id}', [InvoicesController::class, 'updateStatus'])->name('updateStatus')->middleware('auth');
+    Route::post('/search_invoice', [InvoiceReportController::class, 'Search_invoices'])->name('Search_invoices')->middleware('auth');
 });
 
 
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::resource('roles', 'UserManagement\RoleController');
-    Route::resource('users', 'UserManagement\UserController');
-});
+// Route::group(['middleware' => ['auth']], function () {
+//     Route::resource('roles', 'UserManagement\RoleController');
+//     Route::resource('users', 'UserManagement\UserController');
+// });
