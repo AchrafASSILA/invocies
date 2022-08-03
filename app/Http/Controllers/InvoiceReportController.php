@@ -9,7 +9,7 @@ class InvoiceReportController extends Controller
 {
     public function index()
     {
-        return view('invoices.invoices_report');
+        return view('reports.invoices_report');
     }
     public function Search_invoices(Request $request)
     {
@@ -27,7 +27,7 @@ class InvoiceReportController extends Controller
 
                 $invoices = invoices::select('*')->where('Status', '=', $request->type)->get();
                 $type = $request->type;
-                return view('invoices.invoices_report', compact('type', 'invoices'));
+                return view('reports.invoices_report', compact('type', 'invoices'));
             }
 
             // في حالة تحديد تاريخ استحقاق

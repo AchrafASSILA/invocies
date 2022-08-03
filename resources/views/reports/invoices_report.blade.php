@@ -15,7 +15,7 @@
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
 @section('title')
-    تقرير الفواتير - مورا سوفت للادارة الفواتير
+    تقرير الفواتير     
 @stop
 @endsection
 @section('page-header')
@@ -129,7 +129,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    @if ($invoices)
+                    @if (isset( $invoices))
                     
                     
                     <table id="example2" class="table key-buttons text-md-nowrap">

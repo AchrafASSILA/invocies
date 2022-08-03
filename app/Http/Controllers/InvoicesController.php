@@ -7,6 +7,7 @@ use App\Models\Invoices;
 use App\Models\InvoicesAttachments;
 use App\Models\Sections;
 use App\Models\User;
+use App\Notifications\AddInvocieNotification;
 use App\Notifications\addInvoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -112,8 +113,10 @@ class InvoicesController extends Controller
             $imageName = $invoicesRequest->pic->getClientOriginalName();
             $invoicesRequest->pic->move(public_path('Attachments/' . $invoice_number), $imageName);
         }
-        // $user = User::get();
-        // Notification::send($user, new addInvoice($invoice->id));
+        // $user = auth()->user();
+
+        $user = User::get();
+        Notification::send($user, new AddInvocieNotification($invoice));
         return redirect()->route('invoices.index')->with([
             'success' => 'تمت اضافة الفاتورة بنجاح'
         ]);
@@ -127,6 +130,7 @@ class InvoicesController extends Controller
      */
     public function show(int $id)
     {
+
         $invoice = Invoices::find($id);
         $attachments = InvoicesAttachments::where('invoice_id', $id)->get();
 
@@ -169,13 +173,6 @@ class InvoicesController extends Controller
             'success' => 'تمت تعديل الفاتورة بنجاح'
         ]);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\invoices  $invoices
-     * @return \Illuminate\Http\Response
-     */
     public function transformToArchived(int $id)
     {
         $invoice = Invoices::find($id);
@@ -213,5 +210,13 @@ class InvoicesController extends Controller
         return redirect()->route('invoices.index')->with([
             'delete' => 'تم حدف الفاتورة بنجاح'
         ]);
+    }
+    public function markAllNotificationsAsRead(Request $request)
+    {
+        $notifications = auth()->user()->unreadNotifications;
+        if ($notifications) {
+            $notifications->markAsRead();
+            return back();
+        }
     }
 }
