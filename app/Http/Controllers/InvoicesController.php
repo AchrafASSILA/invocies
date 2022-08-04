@@ -113,10 +113,9 @@ class InvoicesController extends Controller
             $imageName = $invoicesRequest->pic->getClientOriginalName();
             $invoicesRequest->pic->move(public_path('Attachments/' . $invoice_number), $imageName);
         }
-        // $user = auth()->user();
 
-        $user = User::get();
-        Notification::send($user, new addInvoice($invoice));
+        $user = auth()->user();
+        // Notification::send($user, new addInvoice($invoice));
         Notification::send($user, new AddInvocieNotification($invoice));
         return redirect()->route('invoices.index')->with([
             'success' => 'تمت اضافة الفاتورة بنجاح'

@@ -30,31 +30,23 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         return view('dashboard');
     })->name('dashboard');
 });
-Route::resource('invoices', InvoicesController::class)->middleware('auth');
-Route::resource('products', ProductsController::class)->middleware('auth');
-Route::resource('sections', SectionsController::class)->middleware('auth');
-Route::resource('invoicesAtt', InvoicesAttachmentsController::class)->middleware('auth');
-Route::get('/invoice_reports', [InvoiceReportController::class, 'index'])->name('invoice_report');
-Route::get('/invoiceArchive', [InvoicesController::class, 'getInvoicesArchived'])->name('invoiceArchive')->middleware('auth');
-Route::get('/markAsRead', [InvoicesController::class, 'markAllNotificationsAsRead'])->name('markAsRead')->middleware('auth');
-Route::get('/print_invoice/{id}', [InvoicesController::class, 'printInvoice'])->name('printInvoice')->middleware('auth');
-Route::put('/restoreInvoice/{id}', [InvoicesController::class, 'restoreInvoice'])->name('restoreInvoice')->middleware('auth');
-Route::post('/invoice/{id}', [InvoicesController::class, 'updateStatus'])->name('updateStatus')->middleware('auth');
-Route::delete('/invoice/{id}', [InvoicesController::class, 'transformToArchived'])->name('transformToArchived')->middleware('auth');
-Route::post('/search_invoice', [InvoiceReportController::class, 'Search_invoices'])->name('Search_invoices')->middleware('auth');
-Route::get('/section/{id}', [InvoicesController::class, 'getproducts'])->middleware('auth');
-Route::resource('users', UserController::class);
-Route::get('/{page}', [AdminController::class, 'index'])->middleware('auth');
-// Route::get('/invoicess/{status}', function () {
-//     return 'jjd';
-// })->name('invoiceStatuss')->middleware('auth');
 
+Route::prefix('admin')->group(function () {
 
-
-// Route::resource('invoices', 'InvoicesController');
-
-// Route::resource('sections', 'SectionsController');
-
-// Route::resource('products', 'ProductsController');
-
-// Route::resource('InvoiceAttachments', 'InvoiceAttachmentsController');
+    Route::resource('invoices', InvoicesController::class)->middleware('auth');
+    Route::resource('products', ProductsController::class)->middleware('auth');
+    Route::resource('sections', SectionsController::class)->middleware('auth');
+    Route::resource('invoicesAtt', InvoicesAttachmentsController::class)->middleware('auth');
+    Route::get('/invoice_reports', [InvoiceReportController::class, 'index'])->name('invoice_report');
+    Route::get('/invoiceArchive', [InvoicesController::class, 'getInvoicesArchived'])->name('invoiceArchive')->middleware('auth');
+    Route::get('/markAsRead', [InvoicesController::class, 'markAllNotificationsAsRead'])->name('markAsRead')->middleware('auth');
+    Route::get('/print_invoice/{id}', [InvoicesController::class, 'printInvoice'])->name('printInvoice')->middleware('auth');
+    Route::put('/restoreInvoice/{id}', [InvoicesController::class, 'restoreInvoice'])->name('restoreInvoice')->middleware('auth');
+    Route::post('/invoice/{id}', [InvoicesController::class, 'updateStatus'])->name('updateStatus')->middleware('auth');
+    Route::delete('/invoice/{id}', [InvoicesController::class, 'transformToArchived'])->name('transformToArchived')->middleware('auth');
+    Route::post('/search_invoice', [InvoiceReportController::class, 'Search_invoices'])->name('Search_invoices')->middleware('auth');
+    Route::get('/section/{id}', [InvoicesController::class, 'getproducts'])->middleware('auth');
+    Route::resource('users', UserController::class);
+    Route::get('/{page}', [AdminController::class, 'index'])->middleware('auth');
+    Route::get('/invoices_status/{status}', [InvoicesController::class, 'getInvoicesByStatus'])->name('invoiceStatus')->middleware('auth');
+});
