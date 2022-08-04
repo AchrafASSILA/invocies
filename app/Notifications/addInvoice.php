@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Invoices;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -10,15 +11,15 @@ use Illuminate\Notifications\Notification;
 class addInvoice extends Notification
 {
     use Queueable;
-
+    private $invoice;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(int $invoice_id)
+    public function __construct(Invoices $invoice)
     {
-        $this->invoice_id = $invoice_id;
+        $this->invoice = $invoice;
     }
 
     /**
@@ -40,7 +41,7 @@ class addInvoice extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = 'http://127.0.0.1:8000/InvoicesDetails/' . $this->invoice_id;
+        $url = 'http://127.0.0.1:8000/InvoicesDetails/' . $this->invoice->idate;
         return (new MailMessage)
             ->subject('اضافة فاتورة جديدة')
             ->line('اضافة فاتورة جديدة')

@@ -116,6 +116,7 @@ class InvoicesController extends Controller
         // $user = auth()->user();
 
         $user = User::get();
+        Notification::send($user, new addInvoice($invoice));
         Notification::send($user, new AddInvocieNotification($invoice));
         return redirect()->route('invoices.index')->with([
             'success' => 'تمت اضافة الفاتورة بنجاح'

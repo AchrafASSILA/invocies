@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $data = User::orderBy('id', 'DESC')->paginate(5);
-        return view('users.index', compact('data'))
+        return view('users.show_users', compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
     public function create()
@@ -68,7 +68,7 @@ class UserController extends Controller
         if (!empty($input['password'])) {
             $input['password'] = Hash::make($input['password']);
         } else {
-            $input = array_except($input, array('password'));
+            // $input = array_except($input, array('password'));
         }
 
         $user = User::find($id);
