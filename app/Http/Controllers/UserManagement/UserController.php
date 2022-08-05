@@ -52,18 +52,32 @@ class UserController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'required|same:confirm-password',
-            'status' => 'required'
-        ]);
-        User::find($id)->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'status' => $request->status,
-        ]);
+        if ($request->password) {
+
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,' . $id,
+                'password' => 'required|same:confirm-password',
+                'status' => 'required'
+            ]);
+            User::find($id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'status' => $request->status,
+            ]);
+        } else {
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,' . $id,
+                'status' => 'required'
+            ]);
+            User::find($id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'status' => $request->status,
+            ]);
+        }
         return redirect()->route('users.index')
             ->with('success', 'تم تحديث المستعمل جديد بنجاح');
     }

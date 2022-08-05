@@ -58,13 +58,13 @@
                             <div class="parsley-input col-md-6" id="fnWrapper">
                                 <label>اسم المستخدم: <span class="tx-danger">*</span></label>
                                 <input class="form-control form-control-sm mg-b-20"
-                                    data-parsley-class-handler="#lnWrapper" name="name" required="" type="text">
+                                    data-parsley-class-handler="#lnWrapper" name="name"  type="text">
                             </div>
 
                             <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
                                 <label>البريد الالكتروني: <span class="tx-danger">*</span></label>
                                 <input class="form-control form-control-sm mg-b-20"
-                                    data-parsley-class-handler="#lnWrapper" name="email" required="" type="email">
+                                    data-parsley-class-handler="#lnWrapper" name="email" type="email">
                             </div>
                         </div>
 
@@ -74,13 +74,13 @@
                         <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
                             <label>كلمة المرور: <span class="tx-danger">*</span></label>
                             <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
-                                name="password" required="" type="password">
+                                name="password"  type="password">
                         </div>
 
                         <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
                             <label> تاكيد كلمة المرور: <span class="tx-danger">*</span></label>
                             <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
-                                name="confirm-password" required="" type="password">
+                                name="confirm-password"  type="password">
                         </div>
                     </div>
 

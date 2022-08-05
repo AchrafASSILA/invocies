@@ -49,8 +49,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/search_invoice', [InvoiceReportController::class, 'Search_invoices'])->name('Search_invoices')->middleware(['auth', 'isactive']);
     Route::post('/search_customer', [UserReportControler::class, 'Search_customers'])->name('Search_customers')->middleware(['auth', 'isactive']);
     Route::get('/section/{id}', [InvoicesController::class, 'getproducts'])->middleware(['auth', 'isactive']);
-    Route::resource('users', UserController::class);
-    Route::get('/users_report', [UserReportControler::class, 'index'])->name('user_report');
+    Route::resource('users', UserController::class)->middleware(['auth', 'isactive']);
+    Route::get('/users_report', [UserReportControler::class, 'index'])->name('user_report')->middleware('auth');
     Route::get('/{page}', [AdminController::class, 'index'])->middleware('auth');
     Route::get('/invoices_status/{status}', [InvoicesController::class, 'getInvoicesByStatus'])->name('invoiceStatus')->middleware(['auth', 'isactive']);
 });

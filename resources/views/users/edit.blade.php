@@ -53,12 +53,12 @@
                     <div class="row mg-b-20">
                         <div class="parsley-input col-md-6" id="fnWrapper">
                             <label>اسم المستخدم: <span class="tx-danger">*</span></label>
-                            {!! Form::text('name', null, array('class' => 'form-control','required')) !!}
+                            {!! Form::text('name', null, array('class' => 'form-control')) !!}
                         </div>
 
                         <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
                             <label>البريد الالكتروني: <span class="tx-danger">*</span></label>
-                            {!! Form::text('email', null, array('class' => 'form-control','required')) !!}
+                            {!! Form::text('email', null, array('class' => 'form-control')) !!}
                         </div>
                     </div>
 
@@ -67,12 +67,12 @@
                 <div class="row mg-b-20">
                     <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
                         <label>كلمة المرور: <span class="tx-danger">*</span></label>
-                        {!! Form::password('password', array('class' => 'form-control','required')) !!}
+                        {!! Form::password('password', array('class' => 'form-control')) !!}
                     </div>
 
                     <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
                         <label> تاكيد كلمة المرور: <span class="tx-danger">*</span></label>
-                        {!! Form::password('confirm-password', array('class' => 'form-control','required')) !!}
+                        {!! Form::password('confirm-password', array('class' => 'form-control')) !!}
                     </div>
                 </div>
 

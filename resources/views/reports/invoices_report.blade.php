@@ -150,7 +150,14 @@
                         </thead>
                         <tbody>
                             
+                            @php
+                                $i = 0;
+                            @endphp
                             @foreach ($invoices as $invoice)
+                            <tr>
+                                @php
+                                    $i++;
+                                @endphp
                             <tr>
                                 
                                 <td>{{1}}</td>

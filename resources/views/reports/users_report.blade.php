@@ -116,57 +116,59 @@
             <div class="card-body">
                 <div class="table-responsive">
                     @if (isset($invoices))
-                        <table id="example" class="table key-buttons text-md-nowrap" style=" text-align: center">
-                            <thead>
-                                <tr>
-                                    <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">رقم الفاتورة</th>
-                                    <th class="border-bottom-0">تاريخ القاتورة</th>
-                                    <th class="border-bottom-0">تاريخ الاستحقاق</th>
-                                    <th class="border-bottom-0">المنتج</th>
-                                    <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">الخصم</th>
-                                    <th class="border-bottom-0">نسبة الضريبة</th>
-                                    <th class="border-bottom-0">قيمة الضريبة</th>
-                                    <th class="border-bottom-0">الاجمالي</th>
-                                    <th class="border-bottom-0">الحالة</th>
-                                    <th class="border-bottom-0">ملاحظات</th>
+                    <table id="example2" class="table key-buttons text-md-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="border-bottom-0">#</th>
+                                <th class="border-bottom-0">رقم الفاتورة</th>
+                                <th class="border-bottom-0">تاريخ الفاتورة</th>
+                                <th class="border-bottom-0">تاريخ الاستحقاق</th>
+                                <th class="border-bottom-0">المنتج</th>
+                                <th class="border-bottom-0">القسم</th>
+                                <th class="border-bottom-0">المبلغ المقترض</th>
+                                <th class="border-bottom-0">مبلغ التحصيل</th>
+                                <th class="border-bottom-0">الفائدة</th>
+                                <th class="border-bottom-0">الحالة</th>
+                                <th class="border-bottom-0">الملاحظات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $i = 0;
+                            @endphp
+                            @foreach ($invoices as $invoice)
+                            <tr>
+                                @php
+                                    $i++;
+                                @endphp
+                                <td>{{1}}</td>
+                                <td><a href="{{route('invoices.show',$invoice->id)}}">{{$invoice->invoice_number}}</a></td>
+                                <td>{{$invoice->invoice_Date}}</td>
+                                <td>{{$invoice->Due_date}}</td>
+                                <td>{{$invoice->product}}</td>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $i = 0; ?>
-                                @foreach ($invoices as $invoice)
-                                    <?php $i++; ?>
-                                    <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>{{ $invoice->invoice_number }} </td>
-                                        <td>{{ $invoice->invoice_Date }}</td>
-                                        <td>{{ $invoice->Due_date }}</td>
-                                        <td>{{ $invoice->product }}</td>
-                                        <td><a
-                                                href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}">{{ $invoice->section->section_name }}</a>
-                                        </td>
-                                        <td>{{ $invoice->Discount }}</td>
-                                        <td>{{ $invoice->Rate_VAT }}</td>
-                                        <td>{{ $invoice->Value_VAT }}</td>
-                                        <td>{{ $invoice->Total }}</td>
-                                        <td>
-                                            @if ($invoice->Value_Status == 1)
-                                                <span class="text-success">{{ $invoice->Status }}</span>
-                                            @elseif($invoice->Value_Status == 2)
-                                                <span class="text-danger">{{ $invoice->Status }}</span>
-                                            @else
-                                                <span class="text-warning">{{ $invoice->Status }}</span>
-                                            @endif
-
-                                        </td>
-
-                                        <td>{{ $invoice->note }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                <td>{{$invoice->section->section_name }} </td>
+                                <td> {{$invoice->amount_borrowed . ' درهم '}} </td>
+                                <td> {{$invoice->amount_collection . ' درهم '}} </td>
+                                <td> {{$invoice->amount_collection - $invoice->amount_borrowed . ' درهم '}} </td>
+                                <td>
+                                @if ($invoice->Value_Status === 1)
+                                    
+                                <span class="text-success">{{$invoice->Status}}</td></span>
+                                @elseif($invoice->Value_Status === 2)
+                                <span class="text-danger">{{$invoice->Status}}</span>
+                                @else()
+                                <span class="text-warning">{{$invoice->Status}}</span>
+                                    
+                                @endif
+                            </td>
+                                <td>{{$invoice->note ? $invoice->note : "لا ملاحظات"  }}  </td>
+                                
+                            </tr>
+                            @endforeach
+                            
+                        </tbody>
+                    </table>
 
                     @endif
                 </div>
