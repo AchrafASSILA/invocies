@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    المستخدمين - مورا سوفت للادارة الفواتير
+    المستخدمين 
 @stop
 
 <!-- Internal Data table css -->
@@ -43,9 +43,8 @@
         <div class="card">
             <div class="card-header pb-0">
                 <div class="col-sm-1 col-md-2">
-                    @can('اضافة مستخدم')
                         <a class="btn btn-primary btn-sm" href="{{ route('users.create') }}">اضافة مستخدم</a>
-                    @endcan
+                    
                 </div>
             </div>
             <div class="card-body">
@@ -57,7 +56,6 @@
                                 <th class="wd-15p border-bottom-0">اسم المستخدم</th>
                                 <th class="wd-20p border-bottom-0">البريد الالكتروني</th>
                                 <th class="wd-15p border-bottom-0">حالة المستخدم</th>
-                                <th class="wd-15p border-bottom-0">نوع المستخدم</th>
                                 <th class="wd-10p border-bottom-0">العمليات</th>
                             </tr>
                         </thead>
@@ -68,37 +66,30 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        @if ($user->Status == 'مفعل')
+                                        @if ($user->status == 'active')
                                             <span class="label text-success d-flex">
-                                                <div class="dot-label bg-success ml-1"></div>{{ $user->Status }}
+                                                <div class="dot-label bg-success ml-1"></div>{{ $user->status }}
                                             </span>
                                         @else
                                             <span class="label text-danger d-flex">
-                                                <div class="dot-label bg-danger ml-1"></div>{{ $user->Status }}
+                                                <div class="dot-label bg-danger ml-1"></div>{{ $user->status }}
                                             </span>
                                         @endif
                                     </td>
 
-                                    <td>
-                                        @if (!empty($user->getRoleNames()))
-                                            @foreach ($user->getRoleNames() as $v)
-                                                <label class="badge badge-success">{{ $v }}</label>
-                                            @endforeach
-                                        @endif
-                                    </td>
+                                    
 
                                     <td>
-                                        @can('تعديل مستخدم')
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-info"
                                                 title="تعديل"><i class="las la-pen"></i></a>
-                                        @endcan
-
-                                        @can('حذف مستخدم')
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                data-user_id="{{ $user->id }}" data-username="{{ $user->name }}"
-                                                data-toggle="modal" href="#modaldemo8" title="حذف"><i
-                                                    class="las la-trash"></i></a>
-                                        @endcan
+                                       <form action="{{route('users.destroy',$user->id)}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                           <button type="submit" class="btn btn-sm btn-danger" 
+                                            title="حذف"><i
+                                           class="las la-trash"></i></button>
+                                        </form>
+                                       
                                     </td>
                                 </tr>
                             @endforeach
@@ -110,30 +101,7 @@
     </div>
     <!--/div-->
 
-    <!-- Modal effects -->
-    <div class="modal" id="modaldemo8">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <h6 class="modal-title">حذف المستخدم</h6><button aria-label="Close" class="close"
-                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <form action="{{ route('users.destroy', 'test') }}" method="post">
-                    {{ method_field('delete') }}
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                        <input type="hidden" name="user_id" id="user_id" value="">
-                        <input class="form-control" name="username" id="username" type="text" readonly>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-danger">تاكيد</button>
-                    </div>
-            </div>
-            </form>
-        </div>
-    </div>
+    
 </div>
 
 </div>
@@ -162,16 +130,6 @@
 <!-- Internal Modal js-->
 <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 
-<script>
-    $('#modaldemo8').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget)
-        var user_id = button.data('user_id')
-        var username = button.data('username')
-        var modal = $(this)
-        modal.find('.modal-body #user_id').val(user_id);
-        modal.find('.modal-body #username').val(username);
-    })
-</script>
 
 
 @endsection

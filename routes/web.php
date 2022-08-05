@@ -6,7 +6,9 @@ use App\Http\Controllers\InvoicesAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionsController;
+use App\Http\Controllers\UserManagement\RoleController;
 use App\Http\Controllers\UserManagement\UserController;
+use App\Http\Controllers\UserReportControler;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,8 +47,10 @@ Route::prefix('admin')->group(function () {
     Route::post('/invoice/{id}', [InvoicesController::class, 'updateStatus'])->name('updateStatus')->middleware('auth');
     Route::delete('/invoice/{id}', [InvoicesController::class, 'transformToArchived'])->name('transformToArchived')->middleware('auth');
     Route::post('/search_invoice', [InvoiceReportController::class, 'Search_invoices'])->name('Search_invoices')->middleware('auth');
+    Route::post('/search_customer', [UserReportControler::class, 'Search_customers'])->name('Search_customers')->middleware('auth');
     Route::get('/section/{id}', [InvoicesController::class, 'getproducts'])->middleware('auth');
     Route::resource('users', UserController::class);
+    Route::get('/users_report', [UserReportControler::class, 'index'])->name('user_report');
     Route::get('/{page}', [AdminController::class, 'index'])->middleware('auth');
     Route::get('/invoices_status/{status}', [InvoicesController::class, 'getInvoicesByStatus'])->name('invoiceStatus')->middleware('auth');
 });

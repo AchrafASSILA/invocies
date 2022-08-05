@@ -3,7 +3,7 @@
 <!-- Internal Nice-select css  -->
 <link href="{{URL::asset('assets/plugins/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" />
 @section('title')
-اضافة مستخدم - مورا سوفت للادارة القانونية
+اضافة مستخدم 
 @stop
 
 
@@ -49,8 +49,8 @@
                     </div>
                 </div><br>
                 <form class="parsley-style-1" id="selectForm2" autocomplete="off" name="selectForm2"
-                    action="{{route('users.store','test')}}" method="post">
-                    {{csrf_field()}}
+                    action="{{route('users.store')}}" method="post">
+                    @csrf
 
                     <div class="">
 
@@ -87,21 +87,14 @@
                     <div class="row row-sm mg-b-20">
                         <div class="col-lg-6">
                             <label class="form-label">حالة المستخدم</label>
-                            <select name="Status" id="select-beast" class="form-control  nice-select  custom-select">
-                                <option value="مفعل">مفعل</option>
-                                <option value="غير مفعل">غير مفعل</option>
+                            <select name="status" id="select-beast" class="form-control  nice-select  custom-select">
+                                <option value="active">مفعل</option>
+                                <option value="deactive">غير مفعل</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="row mg-b-20">
-                        <div class="col-xs-12 col-md-12">
-                            <div class="form-group">
-                                <label class="form-label"> صلاحية المستخدم</label>
-                                {!! Form::select('roles_name[]', $roles,[], array('class' => 'form-control','multiple')) !!}
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <button class="btn btn-main-primary pd-x-20" type="submit">تاكيد</button>
                     </div>
@@ -126,5 +119,5 @@
 <!--Internal  Parsley.min js -->
 <script src="{{URL::asset('assets/plugins/parsleyjs/parsley.min.js')}}"></script>
 <!-- Internal Form-validation js -->
-<script src="{{URL::asset('assets/js/form-validation.js')}}"></script>
+{{-- <script src="{{URL::asset('assets/js/form-validation.js')}}"></script> --}}
 @endsection

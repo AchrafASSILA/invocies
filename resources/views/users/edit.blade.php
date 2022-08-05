@@ -3,7 +3,7 @@
 <!-- Internal Nice-select css  -->
 <link href="{{URL::asset('assets/plugins/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" />
 @section('title')
-تعديل مستخدم - مورا سوفت للادارة القانونية
+تعديل مستخدم 
 @stop
 
 
@@ -47,7 +47,7 @@
                     </div>
                 </div><br>
 
-                {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+                {!! Form::model($user, ['method' => 'PUT','route' => ['users.update', $user->id]]) !!}
                 <div class="">
 
                     <div class="row mg-b-20">
@@ -79,23 +79,15 @@
                 <div class="row row-sm mg-b-20">
                     <div class="col-lg-6">
                         <label class="form-label">حالة المستخدم</label>
-                        <select name="Status" id="select-beast" class="form-control  nice-select  custom-select">
-                            <option value="{{ $user->Status}}">{{ $user->Status}}</option>
-                            <option value="مفعل">مفعل</option>
-                            <option value="غير مفعل">غير مفعل</option>
+                        <select name="status" id="select-beast" class="form-control  nice-select  custom-select">
+                            <option value="{{ $user->status}}">{{$user->status == 'active' ? 'مفعل' :  'غير مفعل' }}</option>
+                            <option value="active">مفعل</option>
+                            <option value="deactive">غير مفعل</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="row mg-b-20">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>نوع المستخدم</strong>
-                            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple'))
-                            !!}
-                        </div>
-                    </div>
-                </div>
+               
                 <div class="mg-t-30">
                     <button class="btn btn-main-primary pd-x-20" type="submit">تحديث</button>
                 </div>
