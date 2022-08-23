@@ -34,22 +34,14 @@
                         <div class="invoice-header">
                             <h1 class="invoice-title">فاتورة تحصيل</h1>
                             <div class="billed-from">
-                                <h6>BootstrapDash, Inc.</h6>
-                                <p>201 Something St., Something Town, YT 242, Country 6546<br>
-                                    Tel No: 324 445-4544<br>
-                                    Email: youremail@companyname.com</p>
+                                <h6>Assila Soft</h6>
+                                <p>Hay Rajaa<br>
+                                    Tel No: 06 34 32 81 47<br>
+                                    Email: achrafassila.soft@gmail.com</p>
                             </div><!-- billed-from -->
                         </div><!-- invoice-header -->
                         <div class="row mg-t-20">
-                            <div class="col-md">
-                                <label class="tx-gray-600">Billed To</label>
-                                <div class="billed-to">
-                                    <h6>Juan Dela Cruz</h6>
-                                    <p>4033 Patterson Road, Staten Island, NY 10301<br>
-                                        Tel No: 324 445-4544<br>
-                                        Email: youremail@companyname.com</p>
-                                </div>
-                            </div>
+                            
                             <div class="col-md">
                                 <label class="tx-gray-600">معلومات الفاتورة</label>
                                 <p class="invoice-info-row"><span>رقم الفاتورة</span>
@@ -68,21 +60,15 @@
                                     <tr>
                                         <th class="wd-20p">#</th>
                                         <th class="wd-40p">المنتج</th>
-                                        <th class="tx-center">المبلغ المقترض</th>
-                                        <th class="tx-right">مبلغ التحصيل</th>
-                                        <th class="tx-right">الفائدة</th>
+                                        <th class="tx-center">المبلغ </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
                                         <td class="tx-12">{{ $invoice->product }}</td>
-                                        <td class="tx-center">{{ number_format($invoice->amount_borrowed, 2) . ' درهم ' }}</td>
-                                        <td class="tx-right">{{ number_format($invoice->amount_collection , 2) . ' درهم '}}</td>
+                                        <td class="tx-center">{{ number_format($invoice->amount, 2) . ' درهم ' }}</td>
                                         
-                                        <td class="tx-right">
-                                            {{$invoice->amount_collection - $invoice->amount_borrowed . ' درهم '}} 
-                                        </td>
                                     </tr>
 
                                 </tbody>

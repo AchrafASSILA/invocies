@@ -64,6 +64,9 @@ class InvoicesController extends Controller
             'Status' => $value_status,
             'Value_Status' => $request->value_status
         ]);
+        if ($request->value_status == 1) {
+            $invoice->delete();
+        }
         return redirect()->route('invoices.index')->with([
             'success' => 'تمت تحديث حالة الفاتورة بنجاح'
         ]);
@@ -93,8 +96,7 @@ class InvoicesController extends Controller
             'Due_date' => $invoicesRequest->Due_date,
             'section_id' => $invoicesRequest->section_id,
             'product' => $invoicesRequest->product,
-            'Amount_borrowed' => $invoicesRequest->Amount_borrowed,
-            'Amount_collection' => $invoicesRequest->Amount_collection,
+            'amount' => $invoicesRequest->amount,
 
             'note' => $invoicesRequest->note,
         ]);
@@ -165,8 +167,7 @@ class InvoicesController extends Controller
             'Due_date' => $invoicesRequest->Due_date,
             'section_id' => $invoicesRequest->section_id,
             'product' => $invoicesRequest->product,
-            'Amount_borrowed' => $invoicesRequest->Amount_borrowed,
-            'Amount_collection' => $invoicesRequest->Amount_collection,
+            'amount_borrowed' => $invoicesRequest->amount,
             'note' => $invoicesRequest->note
         ]);
         return redirect()->route('invoices.index')->with([

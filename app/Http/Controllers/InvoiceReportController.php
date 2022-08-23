@@ -38,7 +38,7 @@ class InvoiceReportController extends Controller
                 $type = $request->type;
 
                 $invoices = invoices::whereBetween('invoice_Date', [$start_at, $end_at])->where('Status', '=', $request->type)->get();
-                return view('invoices.invoices_report', compact('type', 'start_at', 'end_at', 'invoices'));
+                return view('reports.invoices_report', compact('type', 'start_at', 'end_at', 'invoices'));
             }
         }
 
@@ -48,7 +48,7 @@ class InvoiceReportController extends Controller
         else {
 
             $invoices = Invoices::select('*')->where('invoice_number', '=', $request->invoice_number)->get();
-            return view('invoices.invoices_report', compact(
+            return view('reports.invoices_report', compact(
                 'invoices'
             ));
         }

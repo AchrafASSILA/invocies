@@ -59,7 +59,7 @@
 
                             <div class="col">
                                 <label>تاريخ الفاتورة</label>
-                                <input class="form-control fc-datepicker" readonly value="{{$invoice->invoice_Date}}" name="invoice_Date" placeholder="YYYY-MM-DD"
+                                <input class="form-control " readonly value="{{$invoice->invoice_Date}}" name="invoice_Date" placeholder="YYYY-MM-DD"
                                     type="text"  required>
                             </div>
 
@@ -100,19 +100,10 @@
                             </div>
 
                             <div class="col">
-                                <label for="inputName" class="control-label">المبلغ المقترض</label>
-                                <input type="text" class="form-control" id="inputName" name="Amount_borrowed" value="{{$invoice->amount_borrowed}}">
+                                <label for="inputName" class="control-label">المبلغ </label>
+                                <input type="text" class="form-control" id="inputName" name="amount" value="{{$invoice->amount}}">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="inputName" class="control-label">مبلغ التحصيل</label>
-                                <input type="text" class="form-control" id="inputName" name="Amount_collection" value="{{$invoice->amount_collection}}">
-                            </div>
-
-                        </div>
-
-
 
                         {{-- 5 --}}
                         <div class="row">

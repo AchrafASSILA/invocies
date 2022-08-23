@@ -82,9 +82,7 @@
 																		<th class="border-bottom-0">تاريخ الاستحقاق</th>
 																		<th class="border-bottom-0">المنتج</th>
 																		<th class="border-bottom-0">القسم</th>
-																		<th class="border-bottom-0">المبلغ المقترض</th>
-																		<th class="border-bottom-0">مبلغ التحصيل</th>
-																		<th class="border-bottom-0">الفائدة</th>
+																		<th class="border-bottom-0">المبلغ </th>
 																		<th class="border-bottom-0">الحالة</th>
 																		<th class="border-bottom-0">الملاحظات</th>
 																	</tr>
@@ -100,9 +98,7 @@
 																		<td>{{$invoice->product}}</td>
 										
 																		<td>{{$invoice->section->section_name }} </td>
-																		<td> {{$invoice->amount_borrowed . ' درهم '}} </td>
-																		<td> {{$invoice->amount_collection . ' درهم '}} </td>
-																		<td> {{$invoice->amount_collection - $invoice->amount_borrowed . ' درهم '}} </td>
+																		<td> {{$invoice->amount . ' درهم '}} </td>
 																		<td>
 																		@if ($invoice->Value_Status === 1)
 																			

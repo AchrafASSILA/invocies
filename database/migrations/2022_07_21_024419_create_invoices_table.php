@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('product', 50);
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
-            $table->decimal('amount_collection', 8, 2)->nullable();
-            $table->decimal('amount_borrowed', 8, 2)->nullable();
+            $table->decimal('amount', 8, 2)->nullable();
             $table->string('Status', 50)->default('غير مدفوعة');
             $table->integer('Value_Status')->default(2);
             $table->text('note')->nullable();

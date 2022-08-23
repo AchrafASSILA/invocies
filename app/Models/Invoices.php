@@ -16,8 +16,7 @@ class Invoices extends Model
         'Due_date',
         'section_id',
         'product',
-        'Amount_borrowed',
-        'Amount_collection',
+        'amount',
         'Status',
         'Value_Status',
         'note'

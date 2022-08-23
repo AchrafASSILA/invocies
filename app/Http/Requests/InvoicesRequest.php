@@ -29,8 +29,7 @@ class InvoicesRequest extends FormRequest
             "Due_date" => "required",
             "section_id" => "required",
             // "product" => "required|max:255",
-            "Amount_collection" => 'required',
-            "Amount_borrowed" => "required",
+            "amount" => 'required',
             'pic' => 'mimes:jpg,png,pdf,jpeg|file|max:2024'
 
 

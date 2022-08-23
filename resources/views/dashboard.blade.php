@@ -30,7 +30,7 @@
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{number_format( \App\Models\Invoices::sum('amount_collection')  ,2) }} درهم</h4>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{number_format( \App\Models\Invoices::sum('amount')  ,2) }} درهم</h4>
 											<p class="mb-0 tx-12 text-white op-7">{{\App\Models\Invoices::count() }}</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -52,7 +52,7 @@
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{number_format( \App\Models\Invoices::where('Value_Status',2)->sum('amount_collection')  ,2) }} درهم</h4>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{number_format( \App\Models\Invoices::where('Value_Status',2)->sum('amount')  ,2) }} درهم</h4>
 											<p class="mb-0 tx-12 text-white op-7">{{\App\Models\Invoices::where('Value_Status',2)->count()  }}</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -77,7 +77,7 @@
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{number_format( \App\Models\Invoices::where('Value_Status',1)->sum('amount_collection')  ,2) }} درهم</h4>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{number_format( \App\Models\Invoices::where('Value_Status',1)->sum('amount')  ,2) }} درهم</h4>
 											<p class="mb-0 tx-12 text-white op-7">{{\App\Models\Invoices::where('Value_Status',1)->count() }}</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -101,7 +101,7 @@
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{number_format( \App\Models\Invoices::where('Value_Status',3)->sum('amount_collection')  ,2) }} درهم</h4>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{number_format( \App\Models\Invoices::where('Value_Status',3)->sum('amount')  ,2) }} درهم</h4>
 											<p class="mb-0 tx-12 text-white op-7">{{\App\Models\Invoices::where('Value_Status',3)->count() }}</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
