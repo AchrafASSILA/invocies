@@ -30,8 +30,7 @@ class InvoicesRequest extends FormRequest
             "section_id" => "required",
             // "product" => "required|max:255",
             "amount" => 'required',
-            'pic' => 'mimes:jpg,png,pdf,jpeg|file|max:2024'
-
+            'pic' => 'mimes:jpg,png,pdf,jpeg|file|max:2024',
 
         ];
     }

@@ -1,12 +1,22 @@
 @extends('layouts.master')
 @section('css')
     <style>
+        body{
+            direction: rtl;
+        }
         @media print {
             #print_Button {
                 display: none;
             }
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 @endsection
 @section('title')
     معاينه طباعة الفاتورة
@@ -59,15 +69,15 @@
                                 <thead>
                                     <tr>
                                         <th class="wd-20p">#</th>
-                                        <th class="wd-40p">المنتج</th>
-                                        <th class="tx-center">المبلغ </th>
+                                        <th class="wd-40p">profuct</th>
+                                        <th class="tx-center">amount </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
                                         <td class="tx-12">{{ $invoice->product }}</td>
-                                        <td class="tx-center">{{ number_format($invoice->amount, 2) . ' درهم ' }}</td>
+                                        <td class="tx-center">{{ number_format($invoice->amount, 2) . ' Dh ' }}</td>
                                         
                                     </tr>
 
@@ -80,7 +90,8 @@
 
                         <button class="btn btn-danger  float-left mt-3 mr-2" id="print_Button" onclick="printDiv()"> <i
                                 class="mdi mdi-printer ml-1"></i>طباعة</button>
-                    </div>
+                                
+                            </div>
                 </div>
             </div>
         </div><!-- COL-END -->
@@ -94,17 +105,28 @@
 @section('js')
     <!--Internal  Chart.bundle js -->
     <script src="{{ URL::asset('assets/plugins/chart.js/Chart.bundle.min.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script> 
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
     <script type="text/javascript">
         function printDiv() {
             var printContents = document.getElementById('print').innerHTML;
             var originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-            location.reload();
-        }
+            // document.body.innerHTML = printContents;
+            // window.print();
+            // document.body.innerHTML = originalContents;
+            
+            // location.reload();
+            var doc = new jsPDF();
+
+    doc.fromHTML($('#print').html(), 15, 15, {
+        // 'width': 170,
+            // 'elementHandlers': specialElementHandlers
+    });
+    doc.save('sample-file.pdf');
+};
+    
     </script>
 
 @endsection
